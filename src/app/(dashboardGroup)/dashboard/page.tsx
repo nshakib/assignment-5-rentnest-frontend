@@ -1,9 +1,9 @@
 import React from 'react'
 
-const UserDashboardPage = () => {
+const TenantDashboardPage = () => {
   return (
-    <div>UserDashboardPage</div>
+    <div>TenantDashboardPage</div>
   )
 }
 
-export default UserDashboardPage
+export default TenantDashboardPage

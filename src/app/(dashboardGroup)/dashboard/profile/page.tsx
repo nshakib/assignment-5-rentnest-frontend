@@ -1,9 +1,9 @@
 import React from 'react'
 
-const UserProfilePage = () => {
+const TenantProfilePage = () => {
   return (
-    <div>UserProfilePage</div>
+    <div>TenantProfilePage</div>
   )
 }
 
-export default UserProfilePage
+export default TenantProfilePage
