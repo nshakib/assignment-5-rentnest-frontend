@@ -3,6 +3,7 @@
 import { cookies } from "next/headers"
 import jwt,{JwtPayload} from "jsonwebtoken"
 import { redirect } from "next/navigation"
+import { loginSchema } from "@/lib/validators/auth" 
 
 type LoginState = {
     success : true,
@@ -25,21 +26,39 @@ type RegisterState = {
 }
 
 export const loginAction = async (redirectTo : string, prevState: LoginState, formData : FormData) => {
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    const payload = {
-        email,
-        password
+    
+     const raw = {
+        email: formData.get("email"),
+        password: formData.get("password"),
     }
 
-    const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/login`, {
+    // 2. VALIDATE — this is the part that was missing
+    const parsed = loginSchema.safeParse(raw)
+
+    if (!parsed.success) {
+        // stop here — no fetch call, just return field errors
+        return {
+            success: false,
+            message: "Please fix the errors below.",
+            errors: parsed.error.flatten().fieldErrors,
+        }
+    }
+
+
+    // const payload = {
+    //     email,
+    //     password
+    // }
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/login`, {
+        
         method : "POST",
         headers : {
             "Content-Type" : "application/json"
         },
-        body : JSON.stringify(payload)
+        body : JSON.stringify(parsed.data)
     });
+     console.log("ENV:", JSON.stringify(process.env.NEXT_PUBLIC_BACKEND_API_URL))
 
     const result = await res.json();
 
@@ -63,12 +82,13 @@ export const loginAction = async (redirectTo : string, prevState: LoginState, fo
             redirect(redirectTo)
         }
 
-        if(decodedToken.role === "USER"){
-            redirect("/dashboard");
-        } else if (decodedToken.role === "ADMIN"){
+        
+        if (decodedToken.role === "ADMIN"){
             redirect("/admin-dashboard");
-        } else if (decodedToken.role === "AUTHOR"){
-            redirect("/author-dashboard");
+        } else if (decodedToken.role === "LANDLORD"){
+            redirect("/landlord-dashboard");
+        }else if(decodedToken.role === "TENANT"){
+            redirect("/tenant-dashboard");
         }
     }
 
@@ -88,7 +108,7 @@ export const registerAction = async (redirectTo : string, prevState : RegisterSt
         role
     }
 
-    const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/register`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/register`, {
         method : "POST",
         headers : {
             "Content-Type" : "application/json"
@@ -118,10 +138,10 @@ export const registerAction = async (redirectTo : string, prevState : RegisterSt
             redirect(redirectTo)
         }
 
-        if(decodedToken.role === "USER"){
-            redirect("/dashboard");
-        } else if (decodedToken.role === "AUTHOR"){
-            redirect("/author-dashboard");
+        if(decodedToken.role === "LANDLORD"){
+            redirect("/admin-dashboard");
+        } else if (decodedToken.role === "TE"){
+            redirect("/tenant-dashboard");
         }
     }
 

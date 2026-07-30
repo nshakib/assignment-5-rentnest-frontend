@@ -11,11 +11,11 @@ import { toast } from 'sonner'
 
 const RegisterForm = () => {
   const searchParams = useSearchParams();
-    const redirectTo = searchParams.get("redirectTo") ?? "";
+  const redirectTo = searchParams.get("redirectTo") ?? "";
   
-    const [state, action, pending] = useActionState(registerAction.bind(null, redirectTo),false)
+  const [state, action, pending] = useActionState(registerAction.bind(null, redirectTo),false)
 
-    useEffect(() => {
+  useEffect(() => {
     if (!state) return;
     if (state.success) {
       toast.success(state.message || "Registration Successful");
@@ -70,14 +70,11 @@ const RegisterForm = () => {
           </Field>
           <Field className="gap-1.5" data-invalid={!!errors?.role}>
             <FieldLabel htmlFor="role">Role</FieldLabel>
-            <Input
-              id="role"
-              name="role"
-              type="text"
-              placeholder="Enter Your role"
-              autoComplete="current-role"
-              aria-invalid={!!errors?.role}
-            />
+            <select name="role" defaultValue="choose">
+              <option value="choose">Select Role</option>
+              <option value="TENANT">Tenant</option>
+              <option value="LANDLORD">Landlord</option>
+            </select>
             {errors?.role && <FieldError errors={[{ message: errors.role }]} />}
           </Field>
         </FieldGroup>
