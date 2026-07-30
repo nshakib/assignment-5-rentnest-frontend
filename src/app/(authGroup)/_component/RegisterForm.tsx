@@ -8,8 +8,11 @@ import { useSearchParams } from 'next/navigation'
 import { registerAction } from '../_actions/authActions'
 import { useActionState, useEffect } from 'react'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
+
 
 const RegisterForm = () => {
+   const router = useRouter()
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? "";
   
@@ -19,10 +22,16 @@ const RegisterForm = () => {
     if (!state) return;
     if (state.success) {
       toast.success(state.message || "Registration Successful");
+      if (state.redirectToLogin) {
+        const loginUrl = redirectTo
+          ? `/login?redirectTo=${encodeURIComponent(redirectTo)}`
+          : "/login"
+        router.push(loginUrl)
+      }
     } else {
       toast.error(state.message || "Registration failed");
     }
-  }, [state]);
+  }, [state, redirectTo, router]);
 
   const errors = state && !state.success ? state.errors : undefined;
 
@@ -67,6 +76,18 @@ const RegisterForm = () => {
               aria-invalid={!!errors?.password}
             />
             {errors?.password && <FieldError errors={[{ message: errors.password }]} />}
+          </Field>
+          <Field className="gap-1.5" data-invalid={!!errors?.confirmPassword}>
+            <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
+            <Input
+              id="confirm-password"
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Your Password"
+              autoComplete="current-password"
+              aria-invalid={!!errors?.confirmPassword}
+            />
+            {errors?.ConfirmPassword && <FieldError errors={[{ message: errors.confirmPassword }]} />}
           </Field>
           <Field className="gap-1.5" data-invalid={!!errors?.role}>
             <FieldLabel htmlFor="role">Role</FieldLabel>

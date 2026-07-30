@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 import jwt,{JwtPayload} from "jsonwebtoken"
 import { redirect } from "next/navigation"
-import { loginSchema } from "@/lib/validators/auth" 
+import { loginSchema, registerSchema } from "@/lib/validators/auth" 
 
 type LoginState = {
     success : true,
@@ -58,7 +58,6 @@ export const loginAction = async (redirectTo : string, prevState: LoginState, fo
         },
         body : JSON.stringify(parsed.data)
     });
-     console.log("ENV:", JSON.stringify(process.env.NEXT_PUBLIC_BACKEND_API_URL))
 
     const result = await res.json();
 
@@ -96,52 +95,39 @@ export const loginAction = async (redirectTo : string, prevState: LoginState, fo
 }
 
 export const registerAction = async (redirectTo : string, prevState : RegisterState, formData : FormData) => {
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const role = formData.get("role");
-
-    const payload = {
-        name,
-        email,
-        password,
-        role
+    const raw = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        password: formData.get("password"),
+        confirmPassword: formData.get("confirmPassword"),
+        role: formData.get("role"),
     }
 
+    const parsed = registerSchema.safeParse(raw)
+
+    if (!parsed.success) {
+        return {
+            success: false,
+            message: "Please fix the errors below.",
+            errors: parsed.error.flatten().fieldErrors,
+        }
+    }
+
+    const { confirmPassword, ...payload } = parsed.data
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/register`, {
-        method : "POST",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(payload)
-    });
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+    })
 
     const result = await res.json();
-
-    if(result.success){
-        const cookieStore = await cookies()
-
-        cookieStore.set("accessToken", result.data.accessToken , {
-            httpOnly : true,
-            maxAge : 60 * 60 * 24,
-            sameSite : "lax",
-        });
-        cookieStore.set("refreshToken", result.data.refreshToken , {
-            httpOnly : true,
-            maxAge : 60 * 60 * 24 * 7,
-            sameSite : "lax",
-        });
-
-        const decodedToken = jwt.decode(result.data.accessToken) as JwtPayload;
-
-        if(redirectTo && typeof redirectTo === "string" && redirectTo.startsWith("/") && !redirectTo.startsWith("//")){
-            redirect(redirectTo)
-        }
-
-        if(decodedToken.role === "LANDLORD"){
-            redirect("/admin-dashboard");
-        } else if (decodedToken.role === "TE"){
-            redirect("/tenant-dashboard");
+    
+    if (result.success) {
+        return {
+            success: true,
+            message: "Account created! Please log in.",
+            redirectToLogin: true, // client-side effect can router.push("/login") on this flag
         }
     }
 
