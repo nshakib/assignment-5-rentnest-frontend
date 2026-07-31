@@ -15,6 +15,6 @@ export const LANDLORD_SIDEBAR_ITEMS : ISidebarItem[] = [
     {
         label : "Requests",
         href : "/landlord-dashboard/requests",
-        icon : FileTextgit
+        icon : FileText
     },
 ]

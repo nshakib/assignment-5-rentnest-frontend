@@ -20,6 +20,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Toaster />
         {children}
+        {/* <Footer /> */}
       </body>
     </html>
   );

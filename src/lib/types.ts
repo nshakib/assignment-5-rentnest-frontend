@@ -1,25 +1,44 @@
 import { LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
-export interface Property {
+export interface IProperty {
   id: string;
-  slug: string;
+  landlordId: string;
+  categoryId: string;
   title: string;
-  description: string;
-  price: number;
-  priceType: "sale" | "rent";
-  currency: string;
-  category: "Apartments" | "Condos" | "Houses" | "Villas";
-  location: string;
-  size: number; // m2
-  bedrooms: number;
-  bathrooms: number;
-  images: string[];
-  agent: {
+  description: string | null;
+  areaSqft: number | null;
+  bedrooms: number | null;
+  bathrooms: number | null;
+  monthlyRent: number;           // Decimal → number after serialization
+  maintenanceFee: number | null;
+  city: string;
+  neighborhood: string | null;
+  streetAddress: string;
+  status: string;                 // or a union if you know the fixed values, e.g. "ACTIVE" | "RENTED" | "INACTIVE"
+  familyAllowed: boolean;
+  bachelorAllowed: boolean;
+  petsAllowed: boolean;
+  smokingAllowed: boolean;
+  availableFrom: string;          // dates come over JSON as ISO strings, not Date objects
+  createdAt: string;
+  updatedAt: string;
+  landlord: {
+    id: string;
     name: string;
-    avatarUrl: string;
-    profileUrl: string;
   };
+  category: {
+    id: string;
+    name: string;
+  };
+  images: {
+    id: string;
+    url: string;
+  }[];
+  amenities?: {
+    id: string;
+    name: string;
+  }[];
 }
 
 export interface Testimonial {

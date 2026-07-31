@@ -1,7 +1,8 @@
-
+import { PropertyCard } from "@/app/(publicGroup)/_components/properties/PropertyCard";
 import { Button } from "@/components/ui/button";
-import { PropertyCard } from "./propertyCard";
-import { fetchFeaturedProperties } from "@/lib/data/properties";
+import { fetchFeaturedProperties } from "../../_actions/getPropertiesAll";
+import { IProperty } from "@/lib/types";
+import Link from "next/link";
 
 export async function FeaturedProperties() {
   const properties = await fetchFeaturedProperties();
@@ -13,14 +14,15 @@ export async function FeaturedProperties() {
       </h2>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {properties.map((property) => (
-          <PropertyCard key={property.id} property={property} />
-        ))}
+        {properties.map((property:IProperty) => (
+      <PropertyCard key={property.id} property={property} />
+    ))}
+        
       </div>
 
       <div className="mt-10 text-center">
-        <Button variant="outline" size="lg">
-          Browse More Properties
+        <Button variant="outline" size="lg" asChild>
+            <Link href="/properties">Browse More Properties</Link>
         </Button>
       </div>
     </section>

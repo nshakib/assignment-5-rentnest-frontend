@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/shared/navbar";
+import { Footer } from "./_components/home/footer";
 
 const PublicGroupLayout = async (
     {
@@ -11,6 +12,7 @@ const PublicGroupLayout = async (
     <div>
       <Navbar />
       {children}
+      <Footer />
     </div>
   )
 }

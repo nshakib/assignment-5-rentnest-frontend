@@ -2,7 +2,7 @@
 import { getMe } from "@/service/getMe";
 import DashboardSidebar from "./_components/DashboardSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { Navbar } from "@/components/dashboard/Navbar";
+import { Navbar } from "@/app/(dashboardGroup)/_components/dashboard/Navbar";
 
 const DashboardLayout = async (
     {
