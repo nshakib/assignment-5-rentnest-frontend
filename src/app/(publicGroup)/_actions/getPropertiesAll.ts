@@ -1,7 +1,7 @@
 import { IProperty } from "@/lib/types";
 import "server-only";
 
-function normalizeProperty(p: any): IProperty {
+export function normalizeProperty(p: any): IProperty {
   return {
     ...p,
     monthlyRent: Number(p.monthlyRent),
