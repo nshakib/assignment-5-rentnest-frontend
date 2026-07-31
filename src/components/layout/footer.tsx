@@ -25,7 +25,7 @@ const socials = [
   { icon: FaXTwitter, href: "https://twitter.com" },
 ];
 
-async function Copyright() {
+export  async function Copyright() {
   await connection();
   const year = new Date().getFullYear();
   return <>{year}</>;

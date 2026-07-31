@@ -1,24 +1,29 @@
 
-import { DashboardNavbar } from "./_components/dashboard-navbar";
-import { SidebarNav } from "./_components/sidebar-nav";
+import { getMe } from "@/service/getMe";
+import DashboardSidebar from "./_components/DashboardSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { Navbar } from "@/components/dashboard/Navbar";
 
-
-
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+const DashboardLayout = async (
+    {
+        children
+    } : {
+        children: React.ReactNode
+    }
+) => {
+   const user = await getMe();
+   console.log(user);
   return (
-    <div className="flex min-h-screen">
-      {/* Desktop sidebar */}
-      <aside className="hidden w-64 border-r bg-background lg:block">
-        <div className="flex h-14 items-center border-b px-6 font-semibold">
-          Dashboard
+    <div className="min-h-screen flex flex-col">
+      <Navbar user={user} />
+      <SidebarProvider>
+        <div className="flex flex-1">
+          <DashboardSidebar user={user} />
+          <main className="flex-1 min-w-0">{children}</main>
         </div>
-        <SidebarNav />
-      </aside>
-
-      <div className="flex flex-1 flex-col">
-        <DashboardNavbar />
-        <main className="flex-1 p-6">{children}</main>
-      </div>
+      </SidebarProvider>
     </div>
-  )
-}
+  );
+};
+
+export default DashboardLayout

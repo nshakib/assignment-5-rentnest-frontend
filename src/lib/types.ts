@@ -1,3 +1,6 @@
+import { LucideProps } from "lucide-react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
 export interface Property {
   id: string;
   slug: string;
@@ -25,4 +28,30 @@ export interface Testimonial {
   role: string;
   avatarUrl: string;
   quote: string;
+}
+
+type Role = "TENANT" | "LANDLORD" | "ADMIN";
+
+type IUser = {
+    success: boolean,
+    message: string,
+    data: {
+        id: string,
+        name: string,
+        email: string,
+        activeStatus: string,
+        role: Role,
+        createdAt: string,
+        updatedAt: string,
+    }
+}
+
+export type NavbarProps = {
+    user: IUser
+}
+
+export type ISidebarItem = {
+    label: string,
+    href: string,
+    icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>
 }
