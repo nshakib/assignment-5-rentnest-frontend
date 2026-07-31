@@ -1,9 +1,8 @@
-import React from 'react'
 
-const LandlordDashboardPage = () => {
-  return (
-    <div>LandlordDashboardPage</div>
-  )
+
+
+const LandlordDashboardPage = async () => {
+  <div>overview</div>
 }
 
 export default LandlordDashboardPage
