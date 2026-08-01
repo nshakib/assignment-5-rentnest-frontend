@@ -99,3 +99,22 @@ export interface IRentalRequest {
     name: string;
   };
 }
+
+export interface ITenantRentalRequest {
+  id: string;
+  propertyId: string;
+  startDate: string;
+  endDate: string;
+  leaseTermMonths: number | null;
+  additionalNote: string | null;
+  status: "PENDING" | "APPROVED" | "REJECTED" | "ACTIVE" | "COMPLETED";
+  rejectionReason: string | null;
+  createdAt: string;
+  property: {
+    id: string;
+    title: string;
+    city: string;
+    monthlyRent: number;
+    images: { imageUrl: string; isPrimary: boolean }[];
+  };
+}
