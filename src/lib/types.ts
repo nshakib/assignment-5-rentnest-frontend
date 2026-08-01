@@ -74,3 +74,11 @@ export type ISidebarItem = {
     href: string,
     icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>
 }
+
+
+export interface ActionResult<T = unknown> {
+  success: boolean;
+  message?: string;
+  data?: T;
+  fieldErrors?: Record<string, string[]>;
+}

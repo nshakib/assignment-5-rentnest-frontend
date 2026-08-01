@@ -12,7 +12,7 @@ const LandlordPropertiesPage = async () => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">My Properties</h1>
         <Button asChild>
-          <Link href="/dashboard/landlord/properties/new">
+          <Link href="/landlord-dashboard/properties/new">
             <Plus className="mr-2 h-4 w-4" /> Add Property
           </Link>
         </Button>
