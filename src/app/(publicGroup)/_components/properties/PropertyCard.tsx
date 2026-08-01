@@ -15,7 +15,9 @@ export function PropertyCard({ property }: { property: IProperty }) {
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
-          src={property.images?.[0]?.url ?? "/placeholder-property.jpg"}
+          src={property.images?.find((img) => img.isPrimary)?.imageUrl 
+          ?? property.images?.[0]?.imageUrl 
+          ?? "/placeholder-property.jpg"}
           alt={property.title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

@@ -12,7 +12,6 @@ const DashboardLayout = async (
     }
 ) => {
    const user = await getMe();
-   console.log(user);
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar user={user} />

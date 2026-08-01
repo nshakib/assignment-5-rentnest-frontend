@@ -40,7 +40,7 @@ export default async function EditPropertyPage({
           bachelorAllowed: property.bachelorAllowed,
           petsAllowed: property.petsAllowed,
           smokingAllowed: property.smokingAllowed,
-          images: property.images?.map((img: { url: string }) => img.url) ?? [],
+          images: property.images?.map((img: { imageUrl: string }) => img.imageUrl) ?? [],
         }}
       />
     </div>

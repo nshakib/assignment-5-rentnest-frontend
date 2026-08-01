@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { fetchLandlordProperties } from '../../_actions/properties/landlord-properties';
 import { cookies } from 'next/headers';
 
-export async function LandlordPropertiesList() {
+export async function LandlordPropertiesList({ user}: { user: { id: string } }) {
   const properties = await fetchLandlordProperties();
 
   if (properties.length === 0) {

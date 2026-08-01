@@ -33,7 +33,8 @@ export interface IProperty {
   };
   images: {
     id: string;
-    url: string;
+    imageUrl: string;
+    isPrimary: boolean; 
   }[];
   amenities?: {
     id: string;

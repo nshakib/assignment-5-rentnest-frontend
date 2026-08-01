@@ -5,7 +5,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface PropertyGalleryProps {
-  images: { id: string; url: string }[];
+    images: { id: string; imageUrl: string; isPrimary: boolean }[];
   title: string;
 }
 
@@ -14,14 +14,14 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
   const safeImages = images && images.length > 0
     ? images
-    : [{ id: "placeholder", url: "/placeholder-property.jpg" }];
+    : [{ id: "placeholder", imageUrl: "/placeholder-property.jpg", isPrimary: false }];
 
   return (
     <div className="space-y-3">
       {/* Main image */}
       <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-muted">
         <Image
-          src={safeImages[activeIndex].url}
+          src={safeImages[activeIndex].imageUrl}
           alt={`${title} — photo ${activeIndex + 1}`}
           fill
           priority
@@ -45,7 +45,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
               aria-label={`View photo ${index + 1}`}
             >
               <Image
-                src={image.url}
+                src={image.imageUrl}
                 alt=""
                 fill
                 className="object-cover"

@@ -1,6 +1,3 @@
-
-
-
 const LandlordDashboardPage = async () => {
   <div>overview</div>
 }
