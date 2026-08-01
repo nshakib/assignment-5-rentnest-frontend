@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { IProperty } from "@/lib/types";
 import { propertySchema } from "@/lib/validators/property";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function fetchLandlordProperties(): Promise<IProperty[]> {
@@ -60,8 +60,8 @@ export async function createActionProperty(values: unknown) {
     return { success: false, message: result.message ?? "Failed to create property" };
   }
 
-  revalidateTag("landlord-properties"); // invalidate the dashboard list cache
-  revalidateTag("properties");           // also invalidate public listing cache
+  updateTag("landlord-properties"); // invalidate the dashboard list cache
+  updateTag("properties");           // also invalidate public listing cache
 
   redirect("/dashboard/landlord/properties");
 }

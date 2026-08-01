@@ -17,7 +17,7 @@ export function PropertyCard({ property }: { property: IProperty }) {
         <Image
           src={property.images?.find((img) => img.isPrimary)?.imageUrl 
           ?? property.images?.[0]?.imageUrl 
-          ?? "/placeholder-property.jpg"}
+          ?? "https://fastly.picsum.photos/id/819/800/600.jpg?hmac=N0O_svwWwV9vdGdl62bsfW7MPrwcym4O_IaW4iFPE-g"}
           alt={property.title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

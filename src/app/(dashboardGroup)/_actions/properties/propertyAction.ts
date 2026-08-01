@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { updateTag } from "next/cache";
 import { propertySchema } from "@/lib/validators/property";
+import { isAccessTokenExist } from "@/service/refreshToken";
 
 export type PropertyState = {
   success: boolean;
@@ -47,8 +48,7 @@ export const createPropertyAction = async (
     };
   }
 
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
+  const accessToken = await isAccessTokenExist();
 
   if (!accessToken) {
     return { success: false, message: "You must be logged in." };

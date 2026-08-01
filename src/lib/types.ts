@@ -83,3 +83,19 @@ export interface ActionResult<T = unknown> {
   data?: T;
   fieldErrors?: Record<string, string[]>;
 }
+
+export interface IRentalRequest {
+  id: string;
+  propertyId: string;
+  tenantId: string;
+  status: "PENDING" | "APPROVED" | "REJECTED" | "ACTIVE" | "COMPLETED";
+  createdAt: string;
+  property: {
+    id: string;
+    title: string;
+  };
+  tenant: {
+    id: string;
+    name: string;
+  };
+}
