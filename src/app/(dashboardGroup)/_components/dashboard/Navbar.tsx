@@ -42,11 +42,11 @@ export const Navbar = ({ user }: NavbarProps) => {
         {/* Logo */}
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-md">
-            S
+            {user.data.name.charAt(0).toUpperCase()}
           </div>
           <div>
             <Link
-              href="/admin"
+              href="/"
               className="text-lg sm:text-xl font-bold tracking-tight text-gray-800 dark:text-white"
             >
               RentNest

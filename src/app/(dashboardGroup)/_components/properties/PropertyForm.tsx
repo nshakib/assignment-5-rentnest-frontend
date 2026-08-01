@@ -17,7 +17,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { createPropertyAction, PropertyState } from "../../_actions/properties/propertyAction";
+import { createPropertyAction, PropertyState, updatePropertyAction } from "../../_actions/properties/propertyAction";
 
 interface Category {
   id: string;
@@ -47,23 +47,27 @@ interface PropertyDefaults {
 
 const initialState: PropertyState = null;
 
-export function NewPropertyForm({
+export function PropertyForm({
   categories,
   defaultValues,
   redirectTo = "/landlord-dashboard/properties",
+  propertyId  ,
 }: {
   categories: Category[];
   defaultValues?: PropertyDefaults;
   redirectTo?: string;
+  propertyId?: string;
 }) {
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(
   (prevState: PropertyState, formData: FormData) =>
-    createPropertyAction(redirectTo, prevState, formData),
-  initialState
-);
+    propertyId
+        ? updatePropertyAction(propertyId, redirectTo, prevState, formData)
+        : createPropertyAction(redirectTo, prevState, formData),
+    initialState
+  );
 
-  // Bridged fields — Radix-based components need controlled state + hidden input
+  
   const [categoryId, setCategoryId] = useState(defaultValues?.categoryId ?? "");
   const [status, setStatus] = useState(defaultValues?.status !== "INACTIVE");
   const [familyAllowed, setFamilyAllowed] = useState(defaultValues?.familyAllowed ?? false);
@@ -236,7 +240,7 @@ export function NewPropertyForm({
       </div>
 
       <Button type="submit" disabled={isPending} className="w-full">
-        {isPending ? "Saving..." : "Create Property"}
+          {isPending ? "Saving..." : propertyId ? "Update Property" : "Create Property"}
       </Button>
     </form>
   );

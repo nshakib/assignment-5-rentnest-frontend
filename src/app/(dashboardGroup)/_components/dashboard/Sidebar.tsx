@@ -33,12 +33,12 @@ export const Sidebar = ({ user }: NavbarProps) => {
     <div className="flex flex-col h-full bg-[#0f172a] text-slate-300 border-r border-slate-800">
       {/* Logo Section */}
       <div className="px-6 py-8 flex items-center">
-        <Link href="/admin" className="flex items-center gap-x-3">
+        <Link href="/" className="flex items-center gap-x-3">
           <div className="bg-indigo-600 p-2 rounded-lg shadow-lg shadow-indigo-500/20">
             <School className="h-6 w-6 text-white" />
           </div>
           <h1 className="text-xl font-bold tracking-tight text-white">
-            School<span className="text-indigo-400">Pro</span>
+            Rent<span className="text-indigo-400">Nest</span>
           </h1>
         </Link>
       </div>

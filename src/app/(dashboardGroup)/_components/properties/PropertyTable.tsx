@@ -35,7 +35,7 @@ export function PropertyTable({ properties }: { properties: IProperty[] }) {
               <td className="p-3 text-right">
                 <div className="flex justify-end gap-2">
                   <Button asChild variant="ghost" size="icon">
-                    <Link href={`/dashboard/landlord/properties/${property.id}/edit`}>
+                    <Link href={`/landlord-dashboard/properties/${property.id}/edit`}>
                       <Pencil className="h-4 w-4" />
                     </Link>
                   </Button>
