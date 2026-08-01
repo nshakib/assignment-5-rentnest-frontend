@@ -152,3 +152,32 @@ export const updatePropertyAction = async (
     redirectTo,
   };
 };
+
+
+export async function deletePropertyAction(propertyId: string) {
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (!accessToken) {
+    return { success: false, message: "You must be logged in." };
+  }
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/properties/${propertyId}`,
+    {
+      method: "DELETE",
+      headers: { Cookie: `accessToken=${accessToken}` },
+    }
+  );
+
+  const result = await res.json();
+
+  if (!res.ok || !result.success) {
+    return { success: false, message: result.message ?? "Failed to delete property" };
+  }
+
+  updateTag("landlord-properties");
+  updateTag("properties");
+
+  return { success: true, message: "Property deleted successfully" };
+}

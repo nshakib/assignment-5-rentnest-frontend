@@ -4,7 +4,7 @@ import { IProperty } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-// import { DeletePropertyButton } from "./DeletePropertyButton";
+import { DeletePropertyButton } from "./DeletePropertyButton";
 
 export function PropertyTable({ properties }: { properties: IProperty[] }) {
   return (
@@ -39,7 +39,7 @@ export function PropertyTable({ properties }: { properties: IProperty[] }) {
                       <Pencil className="h-4 w-4" />
                     </Link>
                   </Button>
-                  {/* <DeletePropertyButton propertyId={property.id} /> */}
+                  <DeletePropertyButton propertyId={property.id} propertyTitle={property.title}/>
                 </div>
               </td>
             </tr>
