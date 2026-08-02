@@ -4,8 +4,9 @@ import { useOptimistic, useTransition } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "./StatusBadge";
+import { RejectRequestButton } from "./RejectRequestButton";
 import { IRentalRequest } from "@/lib/types";
-import { approveRequestAction, rejectRequestAction } from "../../_actions/properties/requestAction";
+import { approveRequestAction } from "../../_actions/properties/requestAction";
 
 export function RequestsTable({ requests }: { requests: IRentalRequest[] }) {
   const [isPending, startTransition] = useTransition();
@@ -19,18 +20,6 @@ export function RequestsTable({ requests }: { requests: IRentalRequest[] }) {
     startTransition(async () => {
       setOptimisticStatus({ id, status: "APPROVED" });
       const result = await approveRequestAction(id);
-      if (result.success) {
-        toast.success(result.message);
-      } else {
-        toast.error(result.message);
-      }
-    });
-  }
-
-  function handleReject(id: string) {
-    startTransition(async () => {
-      setOptimisticStatus({ id, status: "REJECTED" });
-      const result = await rejectRequestAction(id);
       if (result.success) {
         toast.success(result.message);
       } else {
@@ -80,14 +69,7 @@ export function RequestsTable({ requests }: { requests: IRentalRequest[] }) {
                     >
                       Approve
                     </Button>
-                    <Button
-                      size="sm"
-                      variant="destructive"
-                      disabled={isPending}
-                      onClick={() => handleReject(request.id)}
-                    >
-                      Reject
-                    </Button>
+                    <RejectRequestButton requestId={request.id} />
                   </div>
                 ) : (
                   <span className="text-muted-foreground">—</span>

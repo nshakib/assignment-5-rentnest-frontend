@@ -28,7 +28,8 @@ export async function approveRequestAction(requestId: string) {
   return { success: true, message: "Request approved" };
 }
 
-export async function rejectRequestAction(requestId: string) {
+export async function rejectRequestAction(requestId: string, rejectionReason: string) {
+
   const accessToken = await isAccessTokenExist();
   if (!accessToken) return { success: false, message: "You must be logged in." };
 
@@ -40,7 +41,7 @@ export async function rejectRequestAction(requestId: string) {
         "Content-Type": "application/json",
         Cookie: `accessToken=${accessToken}`,
       },
-      body: JSON.stringify({ status: "REJECTED" }),
+      body: JSON.stringify({ rejectionReason }),
     }
   );
 

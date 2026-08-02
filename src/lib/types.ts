@@ -1,4 +1,4 @@
-import { LucideProps } from "lucide-react";
+import { LucideIcon, LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export interface IProperty {
@@ -93,6 +93,8 @@ export interface IRentalRequest {
   property: {
     id: string;
     title: string;
+    monthlyRent: number;
+
   };
   tenant: {
     id: string;
@@ -117,6 +119,7 @@ export interface ITenantRentalRequest {
     monthlyRent: number;
     images: { imageUrl: string; isPrimary: boolean }[];
   };
+  
 }
 
 
@@ -147,5 +150,31 @@ export interface IReview {
   title: string | null;
   reviewText: string;
   landlordReplyText: string | null;
+  createdAt: string;
+}
+
+export interface LandlordDashboardStats {
+  totalProperties: number;
+  activeRequests: number;
+  totalEarnings: number;
+  pendingRequests: number;
+}
+
+export interface PropertySummary {
+  id: string;
+  title: string;
+  city: string;
+  monthlyRent: number;
+  status: string;
+  createdAt: string;
+  images: Array<{ imageUrl: string; isPrimary: boolean }>;
+}
+
+export interface RentalRequestActivity {
+  id: string;
+  tenantName: string;
+  propertyName: string;
+  status: "PENDING" | "APPROVED" | "REJECTED" | "ACTIVE" | "COMPLETED";
+  amount: number;
   createdAt: string;
 }

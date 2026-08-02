@@ -14,16 +14,25 @@ import {
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { createRentalRequestAction, RentalRequestState } from "../../_actions/properties/rentals/rentalRequestAction";
+import {
+  createRentalRequestAction,
+  RentalRequestState,
+} from "../../_actions/rentals/rentalRequestAction";
 
 const initialState: RentalRequestState = null;
 
-export function RequestToRentButton({ propertyId, status }: { propertyId: string; status: string }) {
+export function RequestToRentButton({
+  propertyId,
+  status,
+}: {
+  propertyId: string;
+  status: string;
+}) {
   const [open, setOpen] = useState(false);
   const [state, formAction, isPending] = useActionState(
     (prevState: RentalRequestState, formData: FormData) =>
       createRentalRequestAction(propertyId, prevState, formData),
-    initialState
+    initialState,
   );
 
   useEffect(() => {
@@ -58,25 +67,38 @@ export function RequestToRentButton({ propertyId, status }: { propertyId: string
               <FieldLabel htmlFor="startDate">Move-in Date</FieldLabel>
               <Input id="startDate" name="startDate" type="date" />
               {state?.errors?.startDate && (
-                <FieldError errors={state.errors.startDate.map((m) => ({ message: m }))} />
+                <FieldError
+                  errors={state.errors.startDate.map((m) => ({ message: m }))}
+                />
               )}
             </Field>
             <Field data-invalid={!!state?.errors?.endDate}>
               <FieldLabel htmlFor="endDate">Move-out Date</FieldLabel>
               <Input id="endDate" name="endDate" type="date" />
               {state?.errors?.endDate && (
-                <FieldError errors={state.errors.endDate.map((m) => ({ message: m }))} />
+                <FieldError
+                  errors={state.errors.endDate.map((m) => ({ message: m }))}
+                />
               )}
             </Field>
           </div>
 
           <Field>
-            <FieldLabel htmlFor="leaseTermMonths">Lease Term (months)</FieldLabel>
-            <Input id="leaseTermMonths" name="leaseTermMonths" type="number" placeholder="e.g. 12" />
+            <FieldLabel htmlFor="leaseTermMonths">
+              Lease Term (months)
+            </FieldLabel>
+            <Input
+              id="leaseTermMonths"
+              name="leaseTermMonths"
+              type="number"
+              placeholder="e.g. 12"
+            />
           </Field>
 
           <Field>
-            <FieldLabel htmlFor="additionalNote">Note to Landlord (optional)</FieldLabel>
+            <FieldLabel htmlFor="additionalNote">
+              Note to Landlord (optional)
+            </FieldLabel>
             <Textarea
               id="additionalNote"
               name="additionalNote"
