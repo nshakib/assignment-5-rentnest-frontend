@@ -1,4 +1,4 @@
-import { LucideIcon, LucideProps } from "lucide-react";
+import {  LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
 export interface IProperty {
@@ -189,11 +189,6 @@ export interface IAdminUser {
   updatedAt: string;
 }
 
-Good — confirmed: GET /api/properties/admin/all and (from earlier) GET /api/rentals/admin/all. Given this backend's consistent pattern (paginated { meta, data } wrapper, like getAllRentalRequestsForAdmin), I'll assume the same shape here — flag if the actual response differs.
-
-1. Types
-ts
-// lib/types.ts
 export interface IAdminProperty {
   id: string;
   title: string;

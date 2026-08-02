@@ -5,7 +5,7 @@ import { fetchLandlordProperties } from '../../_actions/properties/landlord-prop
 import { cookies } from 'next/headers';
 import { IRentalRequest } from '@/lib/types';
 
-export async function LandlordPropertiesList({ user}: { user: { id: string } }) {
+export async function LandlordPropertiesList() {
   const properties = await fetchLandlordProperties();
 
   if (properties.length === 0) {

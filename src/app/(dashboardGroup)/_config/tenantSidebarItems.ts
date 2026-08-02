@@ -18,11 +18,6 @@ export const TENANT_SIDEBAR_ITEMS: ISidebarItem[] = [
     icon: CreditCard,
   },
   {
-    label: "My Reviews",
-    href: "/tenant-dashboard/reviews",
-    icon: Star,
-  },
-  {
     label: "Profile",
     href: "/tenant-dashboard/profile",
     icon: User,

@@ -45,7 +45,7 @@ export async function createActionProperty(values: unknown) {
     return { success: false, message: "Not authenticated" };
   }
 
-  const res = await fetch(`${process.env.BACKEND_API_URL}/api/landlord/properties`, {
+  const res = await fetch(`${process.env.BACKEND_API_URL}/api/properties`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
