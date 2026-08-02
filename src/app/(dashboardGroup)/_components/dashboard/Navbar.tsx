@@ -213,7 +213,7 @@ export const Navbar = ({ user }: NavbarProps) => {
               RentNest
             </Link>
             <p className="text-[10px] font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              Admin Dashboard
+              A rental property marketplace
             </p>
           </div>
         </div>
@@ -251,7 +251,7 @@ export const Navbar = ({ user }: NavbarProps) => {
                 <p className="text-sm font-semibold text-gray-700 dark:text-gray-200 leading-none">
                   {userName}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Admin</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{user.data.role}</p>
               </div>
               <ChevronDown 
                 size={16} 

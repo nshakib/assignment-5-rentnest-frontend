@@ -188,3 +188,39 @@ export interface IAdminUser {
   createdAt: string;
   updatedAt: string;
 }
+
+Good — confirmed: GET /api/properties/admin/all and (from earlier) GET /api/rentals/admin/all. Given this backend's consistent pattern (paginated { meta, data } wrapper, like getAllRentalRequestsForAdmin), I'll assume the same shape here — flag if the actual response differs.
+
+1. Types
+ts
+// lib/types.ts
+export interface IAdminProperty {
+  id: string;
+  title: string;
+  city: string;
+  monthlyRent: number;
+  status: string;
+  landlord: {
+    id: string;
+    name: string;
+    email: string;
+  };
+  createdAt: string;
+}
+
+export interface IAdminRentalRequest {
+  id: string;
+  status: string;
+  createdAt: string;
+  property: {
+    id: string;
+    title: string;
+    city: string;
+    landlordId: string;
+  };
+  tenant: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
