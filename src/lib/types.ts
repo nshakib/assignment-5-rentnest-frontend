@@ -137,3 +137,15 @@ export interface IPayment {
     };
   };
 }
+
+
+export interface IReview {
+  id: string;
+  propertyId: string;
+  rentalRequestId: string;
+  rating: number;
+  title: string | null;
+  reviewText: string;
+  landlordReplyText: string | null;
+  createdAt: string;
+}
