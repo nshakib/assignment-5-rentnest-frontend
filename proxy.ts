@@ -85,13 +85,13 @@ export async function proxy(request: NextRequest) {
     }
 
       // Role-based route protection
-      if (pathname.startsWith("/tenant-dashboard") && userRole !== "TENANT") {
-        return NextResponse.redirect(new URL("/not-found", request.url));
-      } else if (pathname.startsWith("/landlord-dashboard") && userRole !== "LANDLORD") {
-        return NextResponse.redirect(new URL("/not-found", request.url));
-      } else if (pathname.startsWith("/admin-dashboard") && userRole !== "ADMIN") {
-        return NextResponse.redirect(new URL("/not-found", request.url));
-      }
+      // if (pathname.startsWith("/tenant-dashboard") && userRole !== "TENANT") {
+      //   return NextResponse.redirect(new URL("/not-found", request.url));
+      // } else if (pathname.startsWith("/landlord-dashboard") && userRole !== "LANDLORD") {
+      //   return NextResponse.redirect(new URL("/not-found", request.url));
+      // } else if (pathname.startsWith("/admin-dashboard") && userRole !== "ADMIN") {
+      //   return NextResponse.redirect(new URL("/not-found", request.url));
+      // }
 
     return NextResponse.next()
 }

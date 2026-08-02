@@ -1,28 +1,12 @@
+import { Suspense } from "react";
+import { DashboardShell } from "./_components/dashboard/DashboardShell";
+import { DashboardShellSkeleton } from "./_components/dashboard/DashboardShellSkeleton";
 
-import { getMe } from "@/service/getMe";
-import DashboardSidebar from "./_components/DashboardSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { Navbar } from "@/app/(dashboardGroup)/_components/dashboard/Navbar";
 
-const DashboardLayout = async (
-    {
-        children
-    } : {
-        children: React.ReactNode
-    }
-) => {
-   const user = await getMe();
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar user={user} />
-      <SidebarProvider>
-        <div className="flex flex-1">
-          <DashboardSidebar user={user} />
-          <main className="flex-1 min-w-0">{children}</main>
-        </div>
-      </SidebarProvider>
-    </div>
+    <Suspense fallback={<DashboardShellSkeleton />}>
+      <DashboardShell>{children}</DashboardShell>
+    </Suspense>
   );
-};
-
-export default DashboardLayout
+}

@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "./_components/home/footer";
+import { getMe } from "@/service/getMe";
 
 const PublicGroupLayout = async (
     {
@@ -8,9 +9,10 @@ const PublicGroupLayout = async (
         children: React.ReactNode
     }
 ) => {
+  const user  = getMe(); // cookies() read now happens INSIDE this Suspense boundary
   return (
     <div>
-      <Navbar />
+      <Navbar user={user} />
       {children}
       <Footer />
     </div>

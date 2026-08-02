@@ -118,3 +118,22 @@ export interface ITenantRentalRequest {
     images: { imageUrl: string; isPrimary: boolean }[];
   };
 }
+
+
+export interface IPayment {
+  id: string;
+  rentalRequestId: string;
+  amount: number;
+  status: "PENDING" | "PAID" | "FAILED" | "REFUNDED"; // confirm exact enum values from the schema
+  stripeInvoiceId: string | null;
+  paidAt: string | null;
+  failureReason: string | null;
+  createdAt: string;
+  rentalRequest: {
+    property: {
+      id: string;
+      title: string;
+      city: string;
+    };
+  };
+}

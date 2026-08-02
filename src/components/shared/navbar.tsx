@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NavbarProps } from "@/lib/types";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -12,7 +13,7 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-export function Navbar() {
+export function Navbar({ user }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,6 +36,7 @@ export function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-2">
+          
             <Link href="/login" className="text-sm font-medium hover:text-foreground">
             Sign In
             </Link>

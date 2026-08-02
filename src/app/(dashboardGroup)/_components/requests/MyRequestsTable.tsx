@@ -43,7 +43,9 @@ export function MyRequestsTable({ requests }: { requests: ITenantRentalRequest[]
               <td className="p-3 text-right">
                 {request.status === "APPROVED" && (
                   <Button asChild size="sm">
-                    <Link href={`/tenant-dashboard/requests/${request.id}/pay`}>Pay Now</Link>
+                   <Link href={`/tenant-dashboard/requests/${request.id}/pay`}>
+                      Pay Now
+                    </Link>
                   </Button>
                 )}
                 {(request.status === "ACTIVE" || request.status === "COMPLETED") && (
