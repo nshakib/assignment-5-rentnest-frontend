@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { NavbarProps } from "@/lib/types";
+import { logoutAction } from "@/app/(publicGroup)/_actions/logoutActions";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Properties", href: "/properties" },
@@ -37,7 +38,7 @@ export function Navbar({ user }: NavbarProps) {
 
   function handleLogout() {
     startTransition(async () => {
-      // await logoutAction();
+      await logoutAction();
       router.push("/");
       router.refresh();
     });
