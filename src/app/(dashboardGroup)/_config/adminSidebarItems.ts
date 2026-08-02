@@ -9,7 +9,7 @@ export const ADMIN_SIDEBAR_ITEMS: ISidebarItem[] = [
     },
     {
         label : "User Management",
-        href : "/admin-dashboard/user",
+        href : "/admin-dashboard/users",
         icon : FileText
     },
     {

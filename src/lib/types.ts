@@ -178,3 +178,13 @@ export interface RentalRequestActivity {
   amount: number;
   createdAt: string;
 }
+
+export interface IAdminUser {
+  id: string;
+  name: string;
+  email: string;
+  role: "TENANT" | "LANDLORD" | "ADMIN";
+  activeStatus: "ACTIVE" | "BLOCKED";
+  createdAt: string;
+  updatedAt: string;
+}
