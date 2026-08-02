@@ -37,14 +37,13 @@ export const createRentalRequestAction = async (
   }
 
   const payload = {
-    propertyId,
     startDate,
     endDate,
     leaseTermMonths: leaseTermMonths ? Number(leaseTermMonths) : undefined,
     additionalNote: additionalNote || undefined,
   };
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/rentals/my-requests`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/rentals/${propertyId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

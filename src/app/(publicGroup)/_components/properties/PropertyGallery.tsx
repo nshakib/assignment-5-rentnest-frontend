@@ -14,7 +14,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
   const safeImages = images && images.length > 0
     ? images
-    : [{ id: "placeholder", imageUrl: "/placeholder-property.jpg", isPrimary: false }];
+    : [{ id: "placeholder", imageUrl: "https://fastly.picsum.photos/id/819/800/600.jpg?hmac=N0O_svwWwV9vdGdl62bsfW7MPrwcym4O_IaW4iFPE-g", isPrimary: false }];
 
   return (
     <div className="space-y-3">

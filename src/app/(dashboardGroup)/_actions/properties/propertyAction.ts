@@ -17,6 +17,7 @@ export const createPropertyAction = async (
   prevState: PropertyState,
   formData: FormData
 ): Promise<PropertyState> => {
+    console.log("Form entries:", Object.fromEntries(formData.entries()));
   const raw = {
     title: formData.get("title"),
     description: formData.get("description") || undefined,
@@ -48,7 +49,8 @@ export const createPropertyAction = async (
     };
   }
 
-  const accessToken = await isAccessTokenExist();
+ const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
   if (!accessToken) {
     return { success: false, message: "You must be logged in." };

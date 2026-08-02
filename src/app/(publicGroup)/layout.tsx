@@ -13,7 +13,10 @@ const PublicGroupLayout = async (
   return (
     <div>
       <Navbar user={user} />
-      {children}
+      <main>
+          {children}
+      </main>
+      
       <Footer />
     </div>
   )

@@ -3,6 +3,7 @@ import { Bath, BedDouble, Ruler, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { fetchPropertyById } from "../../_actions/fetchPropertyById";
 import { PropertyGallery } from "../../_components/properties/PropertyGallery";
+import { RequestToRentButton } from "@/app/(dashboardGroup)/_components/rentals/RequestToRentButton";
 
 export default async function PropertyDetailsPage({
   params,
@@ -88,8 +89,7 @@ export default async function PropertyDetailsPage({
             <p className="font-medium">{property.landlord?.name ?? "Landlord"}</p>
           </div>
 
-          {/* <RequestToRentButton propertyId={property.id} status={property.status} /> */}
-          {/* develop later */}
+          <RequestToRentButton propertyId={property.id} status={property.status} />
         </aside>
       </div>
     </div>
