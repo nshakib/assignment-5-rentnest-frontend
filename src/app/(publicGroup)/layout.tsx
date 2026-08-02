@@ -1,25 +1,18 @@
-import { Navbar } from "@/components/shared/navbar";
+// app/(publicGroup)/layout.tsx
+import { Suspense } from "react";
 import { Footer } from "./_components/home/footer";
-import { getMe } from "@/service/getMe";
+import { PublicShell } from "./_components/PublicShell";
+import { PublicShellSkeleton } from "./_components/PublicShellSkeleton";
 
-const PublicGroupLayout = async (
-    {
-        children
-    } : {
-        children: React.ReactNode
-    }
-) => {
-  const user  = getMe(); // cookies() read now happens INSIDE this Suspense boundary
+const PublicGroupLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <Navbar user={user} />
-      <main>
-          {children}
-      </main>
-      
+      <Suspense fallback={<PublicShellSkeleton />}>
+        <PublicShell>{children}</PublicShell>
+      </Suspense>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default PublicGroupLayout
+export default PublicGroupLayout;
