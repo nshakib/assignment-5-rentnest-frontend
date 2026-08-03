@@ -10,7 +10,6 @@ export function Newsletter() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Later: call your API route here, e.g. fetch('/api/newsletter', { method: 'POST', body: JSON.stringify({ email }) })
     setSubmitted(true);
   }
 
