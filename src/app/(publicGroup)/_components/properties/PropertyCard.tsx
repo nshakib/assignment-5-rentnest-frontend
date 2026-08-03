@@ -23,9 +23,12 @@ export function PropertyCard({ property }: { property: IProperty }) {
           className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <Badge className="absolute left-3 top-3 capitalize">
-            {property.status === "ACTIVE" ? "Available" : property.status}
-        </Badge>
+        <Badge 
+          className="absolute left-3 top-3 capitalize" 
+          variant={property.status === "ACTIVE" ? "default" : "destructive"} // Red for inactive
+          >
+          {property.status === "ACTIVE" ? "Available" : "Unavailable"}
+        </Badge> 
       </div>
 
       <div className="space-y-2 p-4">
@@ -62,3 +65,5 @@ export function PropertyCard({ property }: { property: IProperty }) {
     </Link>
   );
 }
+
+

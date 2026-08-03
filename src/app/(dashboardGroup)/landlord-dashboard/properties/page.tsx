@@ -4,11 +4,12 @@ import { Plus } from 'lucide-react';
 import { Suspense } from 'react';
 import { PropertiesSkeleton } from '@/app/(publicGroup)/_components/properties/PropertiesSkeleton';
 import { LandlordPropertiesList } from '../../_components/properties/LandlordPropertiesList';
-import { getMe } from '@/service/getMe';
+
+
 
 
 const LandlordPropertiesPage = async () => {
-  const user = await getMe();
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -21,7 +22,7 @@ const LandlordPropertiesPage = async () => {
       </div>
 
       <Suspense fallback={<PropertiesSkeleton />}>
-        <LandlordPropertiesList user={user}/>
+        <LandlordPropertiesList />
       </Suspense>
     </div>
   )

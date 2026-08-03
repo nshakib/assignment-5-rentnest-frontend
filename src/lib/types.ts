@@ -1,6 +1,8 @@
 import {  LucideProps } from "lucide-react";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 
+
+type propertyStatus = "ACTIVE" | "RENTED" | "INACTIVE";
 export interface IProperty {
   id: string;
   landlordId: string;
@@ -15,7 +17,7 @@ export interface IProperty {
   city: string;
   neighborhood: string | null;
   streetAddress: string;
-  status: string;                 // or a union if you know the fixed values, e.g. "ACTIVE" | "RENTED" | "INACTIVE"
+  status: propertyStatus;  
   familyAllowed: boolean;
   bachelorAllowed: boolean;
   petsAllowed: boolean;

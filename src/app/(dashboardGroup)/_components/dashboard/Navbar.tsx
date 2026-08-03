@@ -159,7 +159,7 @@ export const Navbar = ({ user }: NavbarProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
   const router = useRouter();
   const profileRef = useRef<HTMLDivElement>(null);
 
@@ -187,9 +187,9 @@ export const Navbar = ({ user }: NavbarProps) => {
      });
    }
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  // const toggleTheme = () => {
+  //   setTheme(theme === "dark" ? "light" : "dark");
+  // };
 
   // Safe access to user data
   const userName = user?.data?.name || "User";
@@ -222,7 +222,7 @@ export const Navbar = ({ user }: NavbarProps) => {
         <div className="hidden lg:flex items-center gap-4">
           
           {/* Theme Toggle */}
-          {mounted && (
+          {/* {mounted && (
             <button
               onClick={toggleTheme}
               className="rounded-full p-2.5 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-all"
@@ -230,13 +230,13 @@ export const Navbar = ({ user }: NavbarProps) => {
             >
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-          )}
+          )} */}
 
-          {/* Notifications */}
+          {/* Notifications
           <button className="relative rounded-full p-2.5 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-all">
             <Bell size={20} />
             <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white dark:ring-slate-950"></span>
-          </button>
+          </button> */}
 
           {/* User Dropdown */}
           <div className="relative" ref={profileRef}>
@@ -295,7 +295,7 @@ export const Navbar = ({ user }: NavbarProps) => {
         </div>
 
         {/* Mobile Controls */}
-        <div className="flex items-center gap-3 lg:hidden">
+        {/* <div className="flex items-center gap-3 lg:hidden">
           {mounted && (
             <button
               onClick={toggleTheme}
@@ -311,7 +311,7 @@ export const Navbar = ({ user }: NavbarProps) => {
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Mobile Menu Drawer */}
