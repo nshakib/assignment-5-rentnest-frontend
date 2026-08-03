@@ -2,13 +2,6 @@ import Link from "next/link";
 import LoginForm from "../_component/LoginForm";
 import { Command } from "lucide-react";
 import { Suspense } from "react";
-import { cookies } from "next/headers";
-
-async function DynamicAuthCheck() {
-  const cookieStore = await cookies() // dynamic data access lives here
-  // redirect if already logged in, etc.
-  return null
-}
 
 const LoginPage = () => {
   return (
@@ -35,9 +28,9 @@ const LoginPage = () => {
           </div>
           <div className="space-y-4">
             {/* form */}
-            <LoginForm />
-            <Suspense fallback={null}>
-              <DynamicAuthCheck />
+            
+            <Suspense fallback={<div className="animate-pulse h-64 rounded-xl bg-muted" />}>
+                <LoginForm />
             </Suspense>
             {/* <GoogleButton className="w-full" variant="outline" /> */}
             <p className="text-center text-muted-foreground text-xs">

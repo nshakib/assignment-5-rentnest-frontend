@@ -69,12 +69,12 @@ type IUser = {
 }
 
 export type NavbarProps = {
-    user: IUser | null
+    user: IUser 
 }
 
-export type DashboardUserProps = {
-  user: IUser;
-};
+// export type DashboardUserProps = {
+//   user: IUser;
+// };
 
 export type ISidebarItem = {
     label: string,
