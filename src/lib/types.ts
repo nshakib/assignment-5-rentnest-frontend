@@ -225,3 +225,10 @@ export interface IAdminRentalRequest {
     email: string;
   };
 }
+
+
+export interface searchParamsProps {
+  searchParams: { 
+    [key: string]: string | string[] | undefined 
+  };
+}

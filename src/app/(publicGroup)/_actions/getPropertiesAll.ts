@@ -25,25 +25,19 @@ export async function fetchAllProperties(query?: {
 }) {
   const params = new URLSearchParams();
 
-  if (query?.location) params.set("location", query.location as string);
-  if (query?.minPrice) params.set("minPrice", query.minPrice as string);
-  if (query?.maxPrice) params.set("maxPrice", query.maxPrice as string);
-  if (query?.type) params.set("type", query.type as string);
+  if (query?.city) params.set("city", query.city as string);
+  if (query?.categoryId) params.set("categoryId", query.categoryId as string);
+  if (query?.minRent) params.set("minRent", query.minRent as string);
+  if (query?.maxRent) params.set("maxRent", query.maxRent as string);
+  if (query?.bedrooms) params.set("bedrooms", query.bedrooms as string);
   if (query?.page) params.set("page", query.page as string);
 
   const res = await fetch(
     `${process.env.BACKEND_API_URL}/api/properties?${params.toString()}`,
-    {
-      next: {
-        revalidate: 60 * 5, // 5 min — filtered/browse list changes more, refresh sooner
-        tags: ["properties"],
-      },
-    }
+    { next: { revalidate: 60 * 5, tags: ["properties"] } }
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch properties");
-  }
+  if (!res.ok) throw new Error("Failed to fetch properties");
 
   return res.json();
 }

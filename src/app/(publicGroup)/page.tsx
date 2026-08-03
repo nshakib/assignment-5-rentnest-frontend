@@ -5,12 +5,14 @@ import { HowItWorks } from "@/app/(publicGroup)/_components/home/howItWorks";
 import { Newsletter } from "@/app/(publicGroup)/_components/home/newsletter";
 import { Testimonials } from "@/app/(publicGroup)/_components/home/testimonials";
 import { Footer } from "@/app/(publicGroup)/_components/home/footer";
+import { fetchCategories } from "../(dashboardGroup)/_actions/properties/fetchCategories";
 
 
-export default function Home() {
+export default async function Home() {
+  const categories = await fetchCategories();
   return (
     <main>
-      <HeroSearch />
+      <HeroSearch categories={categories}/>
       <FeaturedProperties />
       <HowItWorks />
       <CtaBanner />
