@@ -1,26 +1,30 @@
 import { ISidebarItem } from "@/lib/types";
-import { FileText, LayoutDashboard } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  Building2,
+  ClipboardList,
+} from "lucide-react";
 
 export const ADMIN_SIDEBAR_ITEMS: ISidebarItem[] = [
-    {
-        label : "Overview",
-        href : "/admin-dashboard",
-        icon : LayoutDashboard
-    },
-    {
-        label : "User Management",
-        href : "/admin-dashboard/users",
-        icon : FileText
-    },
-    {
-        label : "Property Management",
-        href : "/admin-dashboard/properties",
-        icon : FileText
-    },
-    {
-        label : "Rental Requests",
-        href : "/admin-dashboard/requests",
-        icon : FileText
-    },
-
-]
+  {
+    label: "Overview",
+    href: "/admin-dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    label: "Users",
+    href: "/admin-dashboard/users",
+    icon: Users,
+  },
+  {
+    label: "Properties",
+    href: "/admin-dashboard/properties",
+    icon: Building2,
+  },
+  {
+    label: "Rental Requests",
+    href: "/admin-dashboard/requests",
+    icon: ClipboardList,
+  },
+];

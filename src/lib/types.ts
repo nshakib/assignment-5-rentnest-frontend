@@ -50,6 +50,7 @@ export interface Testimonial {
   role: string;
   avatarUrl: string;
   quote: string;
+  rating?: number;
 }
 
 type Role = "TENANT" | "LANDLORD" | "ADMIN";
@@ -232,3 +233,4 @@ export interface searchParamsProps {
     [key: string]: string | string[] | undefined 
   };
 }
+

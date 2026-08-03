@@ -1,374 +1,213 @@
-// /* eslint-disable react-hooks/set-state-in-effect */
-
-// "use client";
-
-// import { useState, useEffect } from "react";
-// import {
-//   Bell,
-//   LogOut,
-//   Menu,
-//   X,
-//   User,
-//   Settings,
-//   ChevronDown,
-//   Sun,
-//   Moon,
-// } from "lucide-react";
-// import Link from "next/link";
-// import { useRouter } from "next/navigation";
-// import { useTheme } from "next-themes"; 
-// import { NavbarProps } from "@/lib/types";
-
-// export const Navbar = ({ user }: NavbarProps) => {
-//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-//   const [mounted, setMounted] = useState(false);
-//   const { theme, setTheme } = useTheme();
-//   const router = useRouter();
-
-
-//   useEffect(() => setMounted(true), []);
-
-//   const onLogout = () => {
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("user");
-//     router.push("/login");
-//     router.refresh();
-//   };
-
-//   return (
-//     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md transition-all duration-300">
-//       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        
-//         {/* Logo */}
-//         <div className="flex items-center gap-3">
-//           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-md">
-//             {user.data.name.charAt(0).toUpperCase()}
-//           </div>
-//           <div>
-//             <Link
-//               href="/"
-//               className="text-lg sm:text-xl font-bold tracking-tight text-gray-800 dark:text-white"
-//             >
-//               RentNest
-//             </Link>
-//             <p className="hidden sm:block text-xs text-gray-500 dark:text-gray-400">
-//               Rental Property Marketplace
-//             </p>
-//           </div>
-//         </div>
-
-//         {/* Desktop Menu */}
-//         <div className="hidden lg:flex items-center gap-6">
-          
-//           {mounted && (
-//             <button
-//               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-//               className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all border border-transparent hover:border-gray-300 dark:hover:border-gray-600"
-//             >
-//               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-//             </button>
-//           )}
-
-//           {/* Notification */}
-//           <button className="relative rounded-full p-2 transition hover:bg-gray-100 dark:hover:bg-gray-800">
-//             <Bell size={20} className="text-gray-600 dark:text-gray-300" />
-//             <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500"></span>
-//           </button>
-
-//           {/* User Profile */}
-//           <div className="flex items-center gap-3 rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition cursor-pointer">
-//             <div className="text-right leading-tight">
-//               <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-//                 {user.data.name}
-//               </p>
-//               <p className="text-xs text-gray-500 dark:text-gray-400">{user.data.email}</p>
-//             </div>
-//             <div className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white shadow">
-//               S
-//             </div>
-//             <ChevronDown size={16} className="text-gray-500 dark:text-gray-400" />
-//           </div>
-//         </div>
-
-//         {/* Mobile & Tablet Buttons */}
-//         <div className="flex items-center gap-2 lg:hidden">
-//             {mounted && (
-//                 <button
-//                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-//                 className="p-2 rounded-xl text-gray-600 dark:text-gray-300"
-//                 >
-//                 {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-//                 </button>
-//             )}
-//             <button
-//             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-//             className="flex items-center justify-center rounded-lg p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-//             >
-//             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-//             </button>
-//         </div>
-//       </div>
-
-//       {/* Mobile Menu */}
-//       <div
-//         className={`lg:hidden overflow-hidden transition-all duration-300 ${
-//           isMobileMenuOpen ? "max-h-100 border-t border-gray-200 dark:border-gray-800" : "max-h-0"
-//         }`}
-//       >
-//         <div className="space-y-4 bg-white dark:bg-slate-950 px-5 py-5 shadow-lg">
-//           <div className="flex flex-col gap-2">
-//             <Link href="/profile" className="flex items-center gap-3 rounded-xl px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
-//               <User size={18} /> Profile
-//             </Link>
-//             <Link href="/settings" className="flex items-center gap-3 rounded-xl px-3 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
-//               <Settings size={18} /> Settings
-//             </Link>
-//             <button className="w-full flex items-center gap-x-3 text-sm font-medium px-4 py-3 rounded-xl text-rose-500 hover:bg-rose-500/10 transition-all" onClick={onLogout}>
-//               <LogOut className="h-5 w-5" /> Logout
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
-
-
 "use client";
 
-import { useState, useEffect, useRef, startTransition } from "react";
-import {
-  Bell,
-  LogOut,
-  Menu,
-  X,
-  User,
-  Settings,
-  ChevronDown,
-  Sun,
-  Moon,
-  LayoutDashboard,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { Bell, LogOut, Menu, User, Settings, ChevronDown, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { NavbarProps } from "@/lib/types";
 import { logoutAction } from "@/app/(publicGroup)/_actions/logoutActions";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useSidebarStore } from "@/store/sidebarStore";
+
 export const Navbar = ({ user }: NavbarProps) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  // const { theme, setTheme } = useTheme();
   const router = useRouter();
-  const profileRef = useRef<HTMLDivElement>(null);
+  const { toggle } = useSidebarStore();
+  const [mounted, setMounted] = useState(false);
 
-  
-  // Handle mounting for theme to avoid hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
-        setIsProfileOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
- function handleLogout() {
-     startTransition(async () => {
-       await logoutAction();
-       router.push("/");
-       router.refresh();
-     });
-   }
-   if (!user?.data) {
-    return null; // or a skeleton/loading state
-  }
-
-  // const toggleTheme = () => {
-  //   setTheme(theme === "dark" ? "light" : "dark");
-  // };
-
-  // Safe access to user data
   const userName = user?.data?.name || "User";
   const userEmail = user?.data?.email || "";
+  const userRole = user?.data?.role || "";
   const userInitial = userName.charAt(0).toUpperCase();
 
+  const handleLogout = async () => {
+    try {
+      await logoutAction();
+    } finally {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      router.push("/login");
+      router.refresh();
+    }
+  };
+
+  if (!user?.data) return null;
+
+  // Role badge color mapping
+  const roleColors: Record<string, string> = {
+    ADMIN: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border-purple-200 dark:border-purple-800",
+    LANDLORD: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800",
+    TENANT: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200 dark:border-blue-800",
+  };
+
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-gray-200/80 dark:border-gray-800/80 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl transition-all duration-300">
+    <nav className="sticky top-0 z-40 w-full border-b border-gray-200/60 dark:border-gray-800/60 bg-white/70 dark:bg-slate-950/70 backdrop-blur-2xl transition-colors duration-300">
       <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        
-        {/* Logo Section */}
+
+        {/* ─── Left Section ─── */}
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/20">
-            {userInitial}
-          </div>
-          <div className="hidden sm:block">
-            <Link
-              href="/"
-              className="text-xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-            >
-              RentNest
-            </Link>
-            <p className="text-[10px] font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              A rental property marketplace
-            </p>
+          {/* Hamburger with hover animation */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden shrink-0 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200"
+                onClick={toggle}
+                aria-label="Toggle sidebar"
+              >
+                <Menu size={22} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom" className="lg:hidden">Menu</TooltipContent>
+          </Tooltip>
+
+          {/* Logo with gradient accent */}
+          <div className="flex items-center gap-3">
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-blue-600 text-white font-bold shadow-lg shadow-indigo-500/25 ring-2 ring-white dark:ring-slate-900">
+              {userInitial}
+              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500 border-2 border-white dark:border-slate-900" />
+              </span>
+            </div>
+            <div className="hidden sm:block">
+              <Link
+                href="/"
+                className="group text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              >
+                Rent<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600 group-hover:from-indigo-500 group-hover:to-blue-500 transition-all duration-300">Nest</span>
+              </Link>
+              <p className="text-[10px] font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500">
+                Property Marketplace
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center gap-4">
-          
-          {/* Theme Toggle */}
-          {/* {mounted && (
-            <button
-              onClick={toggleTheme}
-              className="rounded-full p-2.5 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-all"
-              aria-label="Toggle Theme"
-            >
-              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          )} */}
+        {/* ─── Right Section ─── */}
+        <div className="flex items-center gap-2 sm:gap-3">
 
-          {/* Notifications
-          <button className="relative rounded-full p-2.5 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition-all">
-            <Bell size={20} />
-            <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white dark:ring-slate-950"></span>
-          </button> */}
+          {/* Notification bell with count badge + pulse
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="relative rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-950/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all duration-200"
+                aria-label="Notifications"
+              >
+                <Bell size={20} />
+                <span className="absolute top-1.5 right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white ring-2 ring-white dark:ring-slate-950">
+                  3
+                </span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">Notifications</TooltipContent>
+          </Tooltip> */}
+
+          {/* Divider */}
+          <div className="hidden sm:block h-8 w-px bg-gray-200 dark:bg-gray-800 mx-1" />
 
           {/* User Dropdown */}
-          <div className="relative" ref={profileRef}>
-            <button
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="flex items-center gap-3 rounded-full pl-2 pr-4 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all border border-transparent hover:border-gray-200 dark:hover:border-gray-700"
-            >
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-sm font-bold text-white shadow-md">
-                {userInitial}
-              </div>
-              <div className="hidden xl:block text-left">
-                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200 leading-none">
-                  {userName}
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{user.data.role}</p>
-              </div>
-              <ChevronDown 
-                size={16} 
-                className={`text-gray-400 transition-transform duration-200 ${isProfileOpen ? "rotate-180" : ""}`} 
-              />
-            </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className="flex items-center gap-3 rounded-2xl pl-1.5 pr-3 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-900/50 border border-transparent hover:border-gray-200 dark:hover:border-gray-800 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
+                aria-label="User menu"
+              >
+                <Avatar className="h-9 w-9 ring-2 ring-white dark:ring-slate-900 shadow-sm">
+                  <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-blue-600 text-white text-sm font-bold">
+                    {userInitial}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="hidden xl:block text-left min-w-0">
+                  <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 leading-none truncate max-w-[120px]">
+                    {userName}
+                  </p>
+                  <Badge
+                    variant="outline"
+                    className={`mt-1 text-[9px] px-1.5 py-0 font-medium border ${roleColors[userRole] || "bg-gray-100 text-gray-600 border-gray-200"}`}
+                  >
+                    {userRole}
+                  </Badge>
+                </div>
+                <ChevronDown
+                  size={14}
+                  className="text-gray-400 hidden xl:block transition-transform duration-200 data-[state=open]:rotate-180"
+                />
+              </button>
+            </DropdownMenuTrigger>
 
-            {/* Dropdown Menu */}
-            {isProfileOpen && (
-              <div className="absolute right-0 mt-2 w-56 origin-top-right rounded-xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 shadow-xl ring-1 ring-black/5 focus:outline-none animate-in fade-in zoom-in-95 duration-200">
-                <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{userName}</p>
+            <DropdownMenuContent align="end" className="w-64 mt-2 rounded-2xl shadow-2xl border-gray-200 dark:border-gray-800 p-1">
+              {/* Header with avatar */}
+              <div className="flex items-center gap-3 px-3 py-3 mb-1">
+                <Avatar className="h-10 w-10 ring-2 ring-indigo-100 dark:ring-indigo-900">
+                  <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-blue-600 text-white text-sm font-bold">
+                    {userInitial}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="min-w-0">
+                  <p className="font-semibold text-gray-900 dark:text-white text-sm truncate">{userName}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{userEmail}</p>
                 </div>
-                <div className="p-2">
-                  <Link
-                    href="/profile"
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                    onClick={() => setIsProfileOpen(false)}
-                  >
-                    <User size={16} /> Profile
-                  </Link>
-                  <Link
-                    href="/settings"
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                    onClick={() => setIsProfileOpen(false)}
-                  >
-                    <Settings size={16} /> Settings
-                  </Link>
-                  <div className="my-1 h-px bg-gray-100 dark:bg-gray-800" />
-                  <button
-                    onClick={handleLogout}
-                    className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                  >
-                    <LogOut size={16} /> Logout
-                  </button>
-                </div>
               </div>
-            )}
-          </div>
-        </div>
 
-        {/* Mobile Controls */}
-        {/* <div className="flex items-center gap-3 lg:hidden">
-          {mounted && (
-            <button
-              onClick={toggleTheme}
-              className="rounded-full p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          )}
-          
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="rounded-lg p-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div> */}
-      </div>
+              <DropdownMenuSeparator className="dark:bg-gray-800" />
 
-      {/* Mobile Menu Drawer */}
-      <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-slate-950 px-4 py-6 shadow-inner">
-          
-          {/* Mobile User Info */}
-          <div className="mb-6 flex items-center gap-4 rounded-xl bg-gray-50 dark:bg-gray-900 p-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
-              {userInitial}
-            </div>
-            <div>
-              <p className="font-semibold text-gray-900 dark:text-white">{userName}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">{userEmail}</p>
-            </div>
-          </div>
+              <DropdownMenuItem asChild className="rounded-xl cursor-pointer py-2.5 px-3 my-0.5">
+                <Link href="/profile" className="flex items-center">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-950/30 mr-3">
+                    <User size={16} className="text-indigo-600 dark:text-indigo-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium">Profile</span>
+                    <span className="text-[11px] text-gray-400">View & edit your info</span>
+                  </div>
+                </Link>
+              </DropdownMenuItem>
 
-          {/* Mobile Links */}
-          <div className="space-y-2">
-            <Link
-              href="/"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <LayoutDashboard size={20} /> Dashboard
-            </Link>
-            <Link
-              href="/profile"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <User size={20} /> Profile
-            </Link>
-            <Link
-              href="/settings"
-              className="flex items-center gap-3 rounded-xl px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <Settings size={20} /> Settings
-            </Link>
-            
-            <div className="my-4 h-px bg-gray-200 dark:bg-gray-800" />
-            
-            <button
-              onClick={handleLogout}
-              className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-            >
-              <LogOut size={20} /> Logout
-            </button>
-          </div>
+              <DropdownMenuItem asChild className="rounded-xl cursor-pointer py-2.5 px-3 my-0.5">
+                <Link href="/settings" className="flex items-center">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-900/50 mr-3">
+                    <Settings size={16} className="text-gray-600 dark:text-gray-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium">Settings</span>
+                    <span className="text-[11px] text-gray-400">Preferences & security</span>
+                  </div>
+                </Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuSeparator className="dark:bg-gray-800" />
+
+              <DropdownMenuItem
+                onClick={handleLogout}
+                className="rounded-xl cursor-pointer py-2.5 px-3 my-0.5 text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950/30"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-50 dark:bg-red-950/30 mr-3">
+                  <LogOut size={16} className="text-red-600 dark:text-red-400" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium">Sign Out</span>
+                  <span className="text-[11px] text-red-400">End your session</span>
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </nav>

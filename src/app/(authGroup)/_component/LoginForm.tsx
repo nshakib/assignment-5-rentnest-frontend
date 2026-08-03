@@ -60,14 +60,14 @@ const LoginForm = () => {
             {errors?.password && <FieldError errors={[{ message: errors.password }]} />}
           </Field>
 
-          <Field orientation="horizontal">
+          {/* <Field orientation="horizontal">
             <Checkbox id="login-remember" name="remember" />
             <FieldContent>
               <FieldLabel htmlFor="login-remember" className="font-normal">
                 Remember me for 30 days
               </FieldLabel>
             </FieldContent>
-          </Field>
+          </Field> */}
         </FieldGroup>
 
         <Button type="submit" disabled={pending} className="w-full">

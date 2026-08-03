@@ -1,5 +1,12 @@
+// src/app/(dashboardGroup)/_config/tenantSidebarItems.ts
 import { ISidebarItem } from "@/lib/types";
-import { ClipboardList, CreditCard, FileText, LayoutDashboard, Star, User } from "lucide-react";
+import {
+  LayoutDashboard,
+  FileSignature,
+  CreditCard,
+  User,
+  Star,
+} from "lucide-react";
 
 export const TENANT_SIDEBAR_ITEMS: ISidebarItem[] = [
   {
@@ -10,16 +17,25 @@ export const TENANT_SIDEBAR_ITEMS: ISidebarItem[] = [
   {
     label: "My Requests",
     href: "/tenant-dashboard/requests",
-    icon: ClipboardList,
+    icon: FileSignature,
+    
   },
   {
-    label: "My Payments",
+    label: "Payments",
     href: "/tenant-dashboard/payments",
     icon: CreditCard,
+    
+  },
+  {
+    label: "Reviews",
+    href: "/tenant-dashboard/reviews",
+    icon: Star,
+    
   },
   {
     label: "Profile",
     href: "/tenant-dashboard/profile",
     icon: User,
+
   },
 ];
