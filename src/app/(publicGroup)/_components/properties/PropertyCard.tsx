@@ -28,7 +28,7 @@ export function PropertyCard({ property }: { property: IProperty }) {
           variant={property.status === "ACTIVE" ? "default" : "destructive"} // Red for inactive
           >
           {property.status === "ACTIVE" ? "Available" : "Unavailable"}
-        </Badge> 
+        </Badge>
       </div>
 
       <div className="space-y-2 p-4">

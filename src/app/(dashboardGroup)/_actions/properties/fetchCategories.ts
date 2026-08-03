@@ -7,7 +7,7 @@ export interface Category {
 
 export async function fetchCategories(): Promise<Category[]> {
   const res = await fetch(`${process.env.BACKEND_API_URL}/api/categories`, {
-    next: { revalidate: 3600, tags: ["categories"] }, // categories rarely change
+    next: { revalidate: 3600, tags: ["categories"] }, 
   });
 
   if (!res.ok) throw new Error("Failed to fetch categories");

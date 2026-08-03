@@ -1,81 +1,132 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
+
+import { usePropertyFilterStore } from "@/store/propertyFilterStore";
 
 interface Category {
   id: string;
   name: string;
 }
 
-export function PropertyFilters({ categories }: { categories: Category[] }) {
+export function PropertyFilters({
+  categories,
+}: {
+  categories: Category[];
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [city, setCity] = useState(searchParams.get("city") ?? "");
-  const [categoryId, setCategoryId] = useState(searchParams.get("categoryId") ?? "");
-  const [minRent, setMinRent] = useState(searchParams.get("minRent") ?? "");
-  const [maxRent, setMaxRent] = useState(searchParams.get("maxRent") ?? "");
+  const {
+    city,
+    categoryId,
+    minRent,
+    maxRent,
+    setFilters,
+    initialize,
+    reset,
+  } = usePropertyFilterStore();
+
+  // Sync URL -> Zustand
+  useEffect(() => {
+    initialize({
+      city: searchParams.get("city") ?? "",
+      categoryId: searchParams.get("categoryId") ?? "",
+      minRent: searchParams.get("minRent") ?? "",
+      maxRent: searchParams.get("maxRent") ?? "",
+    });
+  }, [searchParams, initialize]);
 
   function applyFilters() {
     const params = new URLSearchParams();
+
     if (city) params.set("city", city);
     if (categoryId) params.set("categoryId", categoryId);
     if (minRent) params.set("minRent", minRent);
     if (maxRent) params.set("maxRent", maxRent);
+
     router.push(`/properties?${params.toString()}`);
   }
 
   function clearFilters() {
-    setCity("");
-    setCategoryId("");
-    setMinRent("");
-    setMaxRent("");
+    reset();
     router.push("/properties");
   }
 
   return (
     <div className="grid grid-cols-1 gap-3 rounded-xl border p-4 sm:grid-cols-2 lg:grid-cols-5">
-      <Input placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
+      <Input
+        placeholder="City"
+        value={city}
+        onChange={(e) =>
+          setFilters({
+            city: e.target.value,
+          })
+        }
+      />
 
-      <Select value={categoryId} onValueChange={setCategoryId}>
+      <Select
+        value={categoryId}
+        onValueChange={(value) =>
+          setFilters({
+            categoryId: value,
+          })
+        }
+      >
         <SelectTrigger>
           <SelectValue placeholder="Property Type" />
         </SelectTrigger>
+
         <SelectContent>
-          {categories.map((c) => (
-            <SelectItem key={c.id} value={c.id}>
-              {c.name}
+          {categories.map((category) => (
+            <SelectItem key={category.id} value={category.id}>
+              {category.name}
             </SelectItem>
           ))}
         </SelectContent>
       </Select>
 
       <Input
+        type="number"
         placeholder="Min Rent"
-        type="number"
         value={minRent}
-        onChange={(e) => setMinRent(e.target.value)}
+        onChange={(e) =>
+          setFilters({
+            minRent: e.target.value,
+          })
+        }
       />
+
       <Input
-        placeholder="Max Rent"
         type="number"
+        placeholder="Max Rent"
         value={maxRent}
-        onChange={(e) => setMaxRent(e.target.value)}
+        onChange={(e) =>
+          setFilters({
+            maxRent: e.target.value,
+          })
+        }
       />
 
       <div className="flex gap-2">
-        <Button onClick={applyFilters} className="flex-1">Apply</Button>
-        <Button onClick={clearFilters} variant="outline">Clear</Button>
+        <Button onClick={applyFilters} className="flex-1">
+          Apply
+        </Button>
+
+        <Button variant="outline" onClick={clearFilters}>
+          Clear
+        </Button>
       </div>
     </div>
   );
