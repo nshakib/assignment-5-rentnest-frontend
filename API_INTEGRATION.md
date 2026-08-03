@@ -117,6 +117,15 @@ This document maps each frontend component/page to the backend API endpoint(s) i
 
 ---
 
+## State Management (Zustand)
+
+| Store | Location | Purpose |
+|---|---|---|
+| `usePropertyFilterStore` | `store/property-filter-store.ts` | Global filter state (`city`, `categoryId`, `minRent`, `maxRent`) shared between `PropertyFilters.tsx` and `heroSearch.tsx` on the properties browse page, kept in sync with URL search params |
+| `useSidebarStore` | `store/sidebar-store.ts` | Global open/closed state for the mobile sidebar, shared between the dashboard `Navbar`/menu toggle button and `Sidebar.tsx`, so either can open or close the same panel without prop drilling |
+
+---
+
 ## Auth & Middleware Notes
 
 - **`proxy.ts`** (Next.js 16 middleware, project root) enforces route protection and role-based access (`/tenant-dashboard`, `/landlord-dashboard`, `/admin-dashboard`) before any page renders. It also transparently refreshes an expired `accessToken` using the `refreshToken` cookie.
