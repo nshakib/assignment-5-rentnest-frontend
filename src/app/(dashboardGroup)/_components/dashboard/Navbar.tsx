@@ -151,7 +151,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
 import { NavbarProps } from "@/lib/types";
 import { logoutAction } from "@/app/(publicGroup)/_actions/logoutActions";
 
@@ -163,6 +162,7 @@ export const Navbar = ({ user }: NavbarProps) => {
   const router = useRouter();
   const profileRef = useRef<HTMLDivElement>(null);
 
+  
   // Handle mounting for theme to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
@@ -186,6 +186,9 @@ export const Navbar = ({ user }: NavbarProps) => {
        router.refresh();
      });
    }
+   if (!user?.data) {
+    return null; // or a skeleton/loading state
+  }
 
   // const toggleTheme = () => {
   //   setTheme(theme === "dark" ? "light" : "dark");

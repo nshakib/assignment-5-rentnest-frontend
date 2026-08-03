@@ -1,13 +1,22 @@
+import { Suspense } from "react";
 import { Navbar } from "@/components/shared/navbar";
+import { getMe } from "@/service/getMe";
+import { NavbarSkeleton } from "@/components/shared/NavbarSkeleton";
 
-const AuthGroupLayout = async (
-    { children }: { children: React.ReactNode }) => {
+async function NavbarWithUser() {
+  const user = await getMe();
+  return <Navbar user={user} />;
+}
 
-  return <div>
-    <Navbar />
-    {children}
-  
-  </div>;
+const AuthGroupLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div>
+      <Suspense fallback={<NavbarSkeleton />}>
+        <NavbarWithUser />
+      </Suspense>
+      {children}
+    </div>
+  );
 };
 
 export default AuthGroupLayout;
